@@ -1,0 +1,19 @@
+services:
+  - type: web
+    name: student-management-api
+    runtime: dotnet
+    repo: https://github.com/Yuvathaarani-ravanan/Student-Management-App.git
+    branch: main
+    buildCommand: dotnet publish -c Release -o out
+    startCommand: dotnet out/StudentManagementApp.dll
+    envVars:
+      - key: ASPNETCORE_ENVIRONMENT
+        value: Production
+      - key: MongoDBSettings__ConnectionURI
+        value: mongodb://192.168.55.99:27017
+      - key: MongoDBSettings__DatabaseName
+        value: Studentdb
+      - key: MongoDBSettings__UserCollectionName
+        value: Users
+      - key: TokenKey
+        value: 9rN2xJkLp7QzA1vF6YdXr4UeMjWc8HgT
