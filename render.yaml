@@ -1,6 +1,6 @@
 services:
   - type: web
-    name: student-management-api
+    name: StudentManagementApp
     runtime: dotnet
     repo: https://github.com/Yuvathaarani-ravanan/Student-Management-App.git
     branch: main
