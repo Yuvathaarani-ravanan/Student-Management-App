@@ -9,4 +9,6 @@ FROM mcr.microsoft.com/dotnet/aspnet:9.0-preview
 WORKDIR /app
 COPY --from=build /app/out .
 
+# Important: Expose the port that matches what Kestrel listens to
+EXPOSE 5000
 ENTRYPOINT ["dotnet", "StudentManagementApp.dll"]

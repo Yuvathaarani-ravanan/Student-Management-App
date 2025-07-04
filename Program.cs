@@ -66,6 +66,8 @@ builder.Services.AddAuthorization();
 
 var app = builder.Build();
 
+if (app.Environment.IsDevelopment() || app.Environment.EnvironmentName == "Production")
+
 // Enable Swagger only in Development (or all, your choice)
 app.UseSwagger();
 app.UseSwaggerUI(c =>
@@ -74,6 +76,13 @@ app.UseSwaggerUI(c =>
     c.RoutePrefix = string.Empty; // Swagger UI at root URL
 });
 
+var port = Environment.GetEnvironmentVariable("PORT") ?? "5000";
+
+builder.WebHost.ConfigureKestrel(options =>
+{
+    options.ListenAnyIP(int.Parse(port));
+});
+app.UseHttpsRedirection();
 app.UseAuthentication();
 app.UseAuthorization();
 
