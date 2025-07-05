@@ -1,14 +1,23 @@
-FROM mcr.microsoft.com/dotnet/sdk:9.0-preview AS build
+# Stage 1: Build the application
+FROM mcr.microsoft.com/dotnet/sdk:8.0 AS build
 WORKDIR /app
 
-COPY . ./
+# Copy everything and restore dependencies
+COPY . . 
 RUN dotnet restore
+
+# Publish the app
 RUN dotnet publish "StudentManagementApp.csproj" -c Release -o out
 
-FROM mcr.microsoft.com/dotnet/aspnet:9.0-preview
+# Stage 2: Build runtime image
+FROM mcr.microsoft.com/dotnet/aspnet:8.0 AS runtime
 WORKDIR /app
-COPY --from=build /app/out .
+COPY --from=build /app/out . 
 
-# Important: Expose the port that matches what Kestrel listens to
-EXPOSE 5000
+# Use environment PORT variable required by Render
+ENV ASPNETCORE_URLS=http://+:$PORT
+
+# Expose the port (optional, Render will still bind automatically)
+EXPOSE 80
+
 ENTRYPOINT ["dotnet", "StudentManagementApp.dll"]

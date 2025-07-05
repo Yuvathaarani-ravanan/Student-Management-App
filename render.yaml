@@ -1,11 +1,11 @@
 services:
   - type: web
     name: StudentManagementApp
-    runtime: dotnet
+    env: docker
     repo: https://github.com/Yuvathaarani-ravanan/Student-Management-App.git
     branch: main
-    buildCommand: dotnet publish -c Release -o out
-    startCommand: dotnet out/StudentManagementApp.dll
+    dockerfilePath: ./Dockerfile
+    autoDeploy: true
     envVars:
       - key: ASPNETCORE_ENVIRONMENT
         value: Production
