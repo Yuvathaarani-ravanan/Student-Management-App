@@ -2,12 +2,11 @@
 FROM mcr.microsoft.com/dotnet/sdk:8.0 AS build
 WORKDIR /app
 
-# Copy .csproj and restore
-COPY StudentManagementApp.csproj ./
-RUN dotnet restore
-
-# Copy all files and build
+# Copy everything first (important for dependencies like Services/Models)
 COPY . ./
+
+# Restore and publish
+RUN dotnet restore
 RUN dotnet publish StudentManagementApp.csproj -c Release -o out
 
 # Stage 2: Runtime
