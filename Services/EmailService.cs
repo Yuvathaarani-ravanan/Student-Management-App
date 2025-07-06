@@ -1,7 +1,7 @@
 using MailKit.Net.Smtp;
 using MimeKit;
 
-namespace StudentManagementApp.Services
+namespace StudentManagementApp.Services;
 {
     public class EmailService
     {

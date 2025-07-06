@@ -1,11 +1,15 @@
+using StudentManagementApp.Models;
+using StudentManagementApp.Services;
+
 var builder = WebApplication.CreateBuilder(args);
 
-// ✅ Add services BEFORE .Build()
-builder.Services.Configure<MongoDBSettings>(
-    builder.Configuration.GetSection("MongoDBSettings")
-);
+// Configuration validation
+var mongoDBSettings = builder.Configuration.GetSection("MongoDBSettings").Get<MongoDBSettings>()
+    ?? throw new ApplicationException("MongoDBSettings configuration is missing");
 
-// Register your services
+builder.Services.Configure<MongoDBSettings>(builder.Configuration.GetSection("MongoDBSettings"));
+
+// Services
 builder.Services.AddSingleton<UserService>();
 builder.Services.AddSingleton<StudentInfoService>();
 builder.Services.AddSingleton<EmailService>();
@@ -16,7 +20,7 @@ builder.Services.AddSwaggerGen();
 
 var app = builder.Build();
 
-// Middleware and pipeline setup
+// Middleware pipeline
 if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();

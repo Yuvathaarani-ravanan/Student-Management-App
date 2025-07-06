@@ -2,7 +2,7 @@ using Microsoft.Extensions.Options;
 using MongoDB.Driver;
 using StudentManagementApp.Models;
 
-namespace StudentManagementApp.Services
+namespace StudentManagementApp.Services;
 {
     public class TaskService
     {

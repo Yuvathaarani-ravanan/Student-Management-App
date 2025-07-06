@@ -1,12 +1,12 @@
-namespace StudentManagementApp.Models
+namespace StudentManagementApp.Models;
 {
     public class MongoDBSettings
     {
-        public string ConnectionURI { get; set; }
-        public string DatabaseName { get; set; }
-        public string UserCollectionName { get; set; }
-        public string TaskCollectionName { get; set; }
-        public string StudentCollectionName { get; set; } = null!;
+        public string ConnectionURI { get; set; } = string.Empty;
+        public string DatabaseName { get; set; } = string.Empty;
+        public string UserCollectionName { get; set; } = string.Empty;
+        public string TaskCollectionName { get; set; } = string.Empty;
+        public string StudentCollectionName { get; set; } = string.Empty;
 
     }
 }

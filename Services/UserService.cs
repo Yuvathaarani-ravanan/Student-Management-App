@@ -3,7 +3,7 @@ using MongoDB.Driver;
 using StudentManagementApp.Models;
 using System.Threading.Tasks;
 
-namespace StudentManagementApp.Services
+namespace StudentManagementApp.Services;
 {
     public class UserService
     {
